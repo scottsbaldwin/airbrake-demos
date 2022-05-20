@@ -63,6 +63,7 @@ public class WeatherResource {
                 String msg = String.format("%s is not a valid location", location);
                 Notice n = Airbrake.buildNotice(new Throwable(msg));
                 n.setParam("location", location);
+                n.setParam("weatherResourceVersion", "v2");
                 Map<String, String> u = new HashMap<String, String>();
                 u.put("id", "123");
                 u.put("name", "Joe Bloggs");

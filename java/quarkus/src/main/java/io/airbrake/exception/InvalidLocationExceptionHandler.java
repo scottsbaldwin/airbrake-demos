@@ -15,6 +15,7 @@ public class InvalidLocationExceptionHandler implements ExceptionMapper<InvalidL
     @Override
     public Response toResponse(InvalidLocationException e) {
         Notice n = Airbrake.buildNotice(e);
+        n.setParam("weatherResourceVersion", "v4");
         Map<String, String> u = new HashMap<String, String>();
         u.put("id", "456");
         u.put("name", "Joe Global Bloggs");
