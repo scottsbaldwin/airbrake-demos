@@ -54,3 +54,61 @@ If you want to learn more about building native executables, please consult http
 Easily start your Reactive RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+## Sample cURL statements
+
+### v1 Endpoints: No Error Monitoring
+
+```
+curl -i http://localhost:8080/api/v1/locations
+
+# Success
+curl -i http://localhost:8080/api/v1/weather/austin
+
+# Returns an HTTP 404, but no error in Airbrake
+curl -i http://localhost:8080/api/v2/weather/boston
+```
+
+
+### v2 Endpoints: Inline Error Monitoring
+
+#### Get Locations
+
+```
+curl -i http://localhost:8080/api/v2/locations
+```
+
+#### Get Weather for a Location
+
+```
+# Success
+curl -i http://localhost:8080/api/v2/weather/austin
+
+# Produces a "boston is not a valid location" Airbrake error
+curl -i http://localhost:8080/api/v2/weather/boston
+```
+
+### v3 Endpoints: Error Monitoring using Logging Middleware
+
+NOTE: Not implemented because Quarkus and log4j won't work. Javabrake's log4javabrake2 middleware is not compatible with Quarkus.
+
+### v4 Endpoints: Global Exception Handlers
+
+#### Get Locations
+
+```
+curl -i http://localhost:8080/api/v2/locations
+```
+
+#### Get Weather for a Location
+
+```
+# Success
+curl -i http://localhost:8080/api/v2/weather/austin
+
+# Produces an error of type InvalidLocationException
+curl -i http://localhost:8080/api/v2/weather/boston
+
+# Produces an error of type CustomException
+curl -i http://localhost:8080/api/v2/weather/bypass
+```
