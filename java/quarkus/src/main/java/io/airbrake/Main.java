@@ -25,12 +25,12 @@ public class Main {
 
         @Override
         public int run(String... args) throws Exception {
-            initialAirbrake();
+            initializeAirbrake();
             Quarkus.waitForExit();
             return 0;
         }
 
-        private void initialAirbrake() {
+        private void initializeAirbrake() {
             Config config = new Config();
             config.projectId = airbrakeProjectId;
             config.projectKey = airbrakeProjectKey;
