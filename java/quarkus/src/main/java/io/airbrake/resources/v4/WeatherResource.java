@@ -84,11 +84,11 @@ public class WeatherResource {
         return true;
     }
 
-    private List<String> getLocationsList() {
+    private List<String> getLocationsList() throws Exception {
         String locationsJson = locations();
         ObjectMapper mapper = new ObjectMapper();
-        List<String> locations = null;
-        // List<String> locations = Arrays.asList(mapper.readValue(locationsJson, String[].class));
+        // List<String> locations = null;
+        List<String> locations = Arrays.asList(mapper.readValue(locationsJson, String[].class));
         return locations;
     }
 }
